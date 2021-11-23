@@ -62,7 +62,7 @@ public class ViewBannerActivity extends AppCompatActivity {
 
 
     private void loadBannerFromDatabase() {
-    // con ket
+    // con ketd
         compositeDisposable.add(shoppingAPI.getBanner(
                 Common.API_KEY
         ).subscribeOn(Schedulers.io())
