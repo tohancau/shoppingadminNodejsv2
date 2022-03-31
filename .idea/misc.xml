@@ -8,9 +8,11 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_ql_banner.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_view_banner.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/activity_view_report.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/app_bar_home.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_detail_user.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/item_image_banner.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/item_report.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/item_user.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/menu/home.xml" value="0.25052083333333336" />

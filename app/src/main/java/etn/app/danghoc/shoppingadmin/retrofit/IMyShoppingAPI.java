@@ -1,10 +1,13 @@
 package etn.app.danghoc.shoppingadmin.retrofit;
 
 import etn.app.danghoc.shoppingadmin.model.BannerModel;
+import etn.app.danghoc.shoppingadmin.model.DeleteProductModel;
+import etn.app.danghoc.shoppingadmin.model.SanPhamBaoCaoModel;
 import etn.app.danghoc.shoppingadmin.model.SanPhamModel;
 import etn.app.danghoc.shoppingadmin.model.UpdateAdminModel;
 import etn.app.danghoc.shoppingadmin.model.AdminModel;
 import etn.app.danghoc.shoppingadmin.model.UpdateStatusUserModel;
+import etn.app.danghoc.shoppingadmin.model.UploadSanPhamModel;
 import etn.app.danghoc.shoppingadmin.model.UserModel;
 import io.reactivex.Observable;
 import retrofit2.http.DELETE;
@@ -43,6 +46,9 @@ public interface IMyShoppingAPI {
     Observable<SanPhamModel> getSanPhamByUser(@Query("key") String apiKey,
                                               @Query("IdUser") String IdUser);
 
+    @GET("sanPhamByBaoCao")
+    Observable<SanPhamBaoCaoModel> getSanPhamByBaoCao(@Query("key") String apiKey);
+
     // banner
     @GET("banner")
     Observable<BannerModel> getBanner(@Query("key") String apiKey);
@@ -54,4 +60,18 @@ public interface IMyShoppingAPI {
     @DELETE("banner")
     Observable<BannerModel> deleteBanner(@Query("key") String apiKey,
                                                  @Query("UrlHinhAnh") String UrlHinhAnh);
+
+    /// san pham
+    @DELETE("sanpham")
+    Observable<DeleteProductModel> deleteProduct(@Query("key") String apiKey,
+                                                 @Query("IdSP") int IdSP);
+
+    @POST("updateSanPhamBaoCao")
+    @FormUrlEncoded
+    Observable<UploadSanPhamModel> updateSanPhamBaoCao(
+            @Field("key") String key,
+            @Field("IdSP") int IdSP,
+            @Field("BaoCao")int BaoCao
+    );
+
 }
