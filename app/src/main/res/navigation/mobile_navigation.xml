@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_detai_user"
         android:name="etn.app.danghoc.shoppingadmin.ui.detail_user.DetailUserFragment"
-        android:label="thong tin nguoi dung"
+        android:label="Thông tin người dùng"
         tools:layout="@layout/fragment_detail_user" />
 
     <fragment
