@@ -47,6 +47,8 @@ public class DetailUserFragment extends Fragment {
     TextView txt_status;
     @BindView(R.id.txt_status_sp)
     TextView txt_status_sp;
+    @BindView(R.id.txt_money)
+    TextView txt_money;
     @BindView(R.id.btn_khoa)
     Button btn_khoa;
     @BindView(R.id.btn_mo_khoa)
@@ -83,13 +85,8 @@ public class DetailUserFragment extends Fragment {
                txt_status_sp.setVisibility(View.GONE);
                displaySanPham();
            }
-
        });
-
-
-
         return root;
-
     }
 
     private void displaySanPham() {
@@ -102,6 +99,7 @@ public class DetailUserFragment extends Fragment {
     private void initView() {
         txt_phone_number.setText(Common.userSelect.getPhoneUser());
         txt_status.setText(Common.convertStatusToString(Common.userSelect.getTrangThai()));
+        txt_money.setText("số tiền :"+Common.userSelect.getAmountMoney()+"đ");
         if(Common.userSelect.getTrangThai()==0)//dang hoa dong
             btn_mo_khoa.setVisibility(View.GONE);
         else btn_khoa.setVisibility(View.GONE);
