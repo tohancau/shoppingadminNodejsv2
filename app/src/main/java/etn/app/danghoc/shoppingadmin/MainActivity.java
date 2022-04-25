@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -45,25 +46,49 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_sign_in)
     Button btn_sign_in;
+    @BindView(R.id.edt_user_name)
+    EditText edt_user_name;
+
 
     @OnClick(R.id.btn_sign_in)
     void loginUser()
     {
-        //Intent intent=
-        Toast.makeText(this, "di vao login", Toast.LENGTH_SHORT).show();
-//        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-//                .setAvailableProviders(providers).build(),APP_REQUEST_CODE);
+        compositeDisposable.add(myRestaurantAPI.getAdmin(Common.API_KEY,edt_user_name.getText().toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userModel -> {
+                    if(userModel.isSuccess())
+                    {
+                        Common.currentUser=userModel.getResult().get(0);
+                        startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                        //  startActivity(new Intent(MainActivity.this,ActivityTest.class));
+                        Toast.makeText(this, "ket thuc o hang trn", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "ket thuc o hang duoi", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this,UpdateInfoActivity.class));
+                        finish();
+                    }
+                }));
 
-
-        FirebaseAuth  mAuth = FirebaseAuth.getInstance();
-// set this to remove reCaptcha web // xoa cai captcha
-        mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
-
-        someActivityResultLauncher.launch(AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .setIsSmartLockEnabled(false)
-                .build());
+        // code draft
+//        //Intent intent=
+//        Toast.makeText(this, "di vao login", Toast.LENGTH_SHORT).show();
+////        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
+////                .setAvailableProviders(providers).build(),APP_REQUEST_CODE);
+//
+//
+//        FirebaseAuth  mAuth = FirebaseAuth.getInstance();
+//// set this to remove reCaptcha web // xoa cai captcha
+//        mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
+//
+//        someActivityResultLauncher.launch(AuthUI.getInstance()
+//                .createSignInIntentBuilder()
+//                .setAvailableProviders(providers)
+//                .setIsSmartLockEnabled(false)
+//                .build());
 
     }
 
@@ -90,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         Toast.makeText(MainActivity.this, "this is manin", Toast.LENGTH_SHORT);
         initt();
     }

@@ -97,12 +97,17 @@ public class DetailUserFragment extends Fragment {
     }
 
     private void initView() {
-        txt_phone_number.setText(Common.userSelect.getPhoneUser());
-        txt_status.setText(Common.convertStatusToString(Common.userSelect.getTrangThai()));
-        txt_money.setText("số tiền :"+Common.userSelect.getAmountMoney()+"đ");
-        if(Common.userSelect.getTrangThai()==0)//dang hoa dong
-            btn_mo_khoa.setVisibility(View.GONE);
-        else btn_khoa.setVisibility(View.GONE);
+        try {
+            txt_phone_number.setText(Common.userSelect.getPhoneUser());
+            txt_status.setText(Common.convertStatusToString(Common.userSelect.getTrangThai()));
+            txt_money.setText("số tiền :"+Common.userSelect.getAmountMoney()+"đ");
+            if(Common.userSelect.getTrangThai()==0)//dang hoa dong
+                btn_mo_khoa.setVisibility(View.GONE);
+            else btn_khoa.setVisibility(View.GONE);
+        }catch (Exception e){
+            Toast.makeText(getContext(), "loi "+e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 

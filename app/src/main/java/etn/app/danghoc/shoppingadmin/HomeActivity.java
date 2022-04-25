@@ -118,6 +118,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         else if(id==R.id.nav_view_report){
             startActivity(new Intent(HomeActivity.this,ViewReportActivity.class));
         }
+        else if(id==R.id.nav_add_new_admin){
+            startActivity(new Intent(HomeActivity.this,AddNewAdmin.class));
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

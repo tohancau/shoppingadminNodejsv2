@@ -18,6 +18,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IMyShoppingAPI {
+    // admin
     @GET("admin")
     Observable<AdminModel> getAdmin(@Query("key") String apiKey,
                                     @Query("IdAdmin") String IdAdmin);
@@ -28,7 +29,13 @@ public interface IMyShoppingAPI {
                                                 @Field("AdminPhone") String userPhone,
                                                 @Field("AdminName") String adminName,
                                                 @Field("IdAdmin") String fbid);
+    @POST("adminQuyen")
+    @FormUrlEncoded
+    Observable<UpdateAdminModel> addAdmin(@Field("key") String apiKey,
+                                                @Field("NameAdmin") String Name,
+                                                @Field("IdAdmin") String userName);
 
+    // user
     @GET("searchUser")
     Observable<UserModel> searchUser(@Query("key") String apiKey,
                                      @Query("PhoneUser")String phone);
