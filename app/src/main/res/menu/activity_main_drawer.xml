@@ -30,5 +30,10 @@
             android:icon="@drawable/ic_baseline_add_24"
             android:title="Thêm admin mới"
             />
+        <item
+            android:id="@+id/nav_manage_admin"
+            android:icon="@drawable/ic_baseline_manage_accounts_24"
+            android:title="quản lý admin"
+            />
     </group>
 </menu>

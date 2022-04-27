@@ -23,6 +23,12 @@ public interface IMyShoppingAPI {
     Observable<AdminModel> getAdmin(@Query("key") String apiKey,
                                     @Query("IdAdmin") String IdAdmin);
 
+    @GET("getalladmin")
+    Observable<AdminModel> getAllAdmin(@Query("key") String apiKey,
+                                    @Query("IdAdmin") String IdAdmin);
+    @DELETE("admin")
+    Observable<DeleteProductModel> deleteAdmin(@Query("key") String apiKey,
+                                                   @Query("IdAdmin") String IdAdmin);
     @POST("admin")
     @FormUrlEncoded
     Observable<UpdateAdminModel> updateUserInfo(@Field("key") String apiKey,
@@ -34,6 +40,7 @@ public interface IMyShoppingAPI {
     Observable<UpdateAdminModel> addAdmin(@Field("key") String apiKey,
                                                 @Field("NameAdmin") String Name,
                                                 @Field("IdAdmin") String userName);
+
 
     // user
     @GET("searchUser")
