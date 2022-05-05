@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     IMyShoppingAPI myRestaurantAPI;
     CompositeDisposable compositeDisposable=new CompositeDisposable();
 
+    SharedPreferences sharedPreferences;
+
     @BindView(R.id.btn_sign_in)
     Button btn_sign_in;
     @BindView(R.id.edt_user_name)
@@ -59,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(userModel -> {
                     if(userModel.isSuccess())
                     {
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
                         Common.currentUser=userModel.getResult().get(0);
+                        editor.putString("idadmin","fjsofjsdofhdsofi");
+                        editor.commit();
+
                         startActivity(new Intent(MainActivity.this,HomeActivity.class));
                         //  startActivity(new Intent(MainActivity.this,ActivityTest.class));
                         Toast.makeText(this, "ket thuc o hang trn", Toast.LENGTH_SHORT).show();
@@ -116,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
         Toast.makeText(MainActivity.this, "this is manin", Toast.LENGTH_SHORT);
         initt();
     }

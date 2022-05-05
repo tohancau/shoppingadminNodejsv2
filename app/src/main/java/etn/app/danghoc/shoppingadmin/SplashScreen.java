@@ -3,6 +3,7 @@ package etn.app.danghoc.shoppingadmin;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class SplashScreen extends AppCompatActivity {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     AlertDialog dialog;
+    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -42,10 +44,14 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
+        if(sharedPreferences.getString("idadmin","").length()>2){
+            startActivity(new Intent(SplashScreen.this, HomeActivity.class));
+        }else{
+            startActivity(new Intent(SplashScreen.this, MainActivity.class));
 
-
+        }
         init();
-
 
         Dexter.withContext(this)
                 .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)

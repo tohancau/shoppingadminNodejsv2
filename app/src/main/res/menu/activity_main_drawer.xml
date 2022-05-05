@@ -16,10 +16,7 @@
             android:id="@+id/nav_view_banner"
             android:icon="@drawable/ic_baseline_all_inbox_24"
             android:title="quản lý  banner" />
-        <item
-            android:id="@+id/nav_signout"
-            android:icon="@drawable/ic_baseline_exit_to_app_24"
-            android:title="@string/signout" />
+
         <item
             android:id="@+id/nav_view_report"
             android:icon="@drawable/ic_baseline_dirty_lens_24"
@@ -35,5 +32,9 @@
             android:icon="@drawable/ic_baseline_manage_accounts_24"
             android:title="quản lý admin"
             />
+        <item
+            android:id="@+id/nav_signout"
+            android:icon="@drawable/ic_baseline_exit_to_app_24"
+            android:title="@string/signout" />
     </group>
 </menu>

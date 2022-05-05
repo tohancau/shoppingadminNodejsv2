@@ -1,9 +1,11 @@
 package etn.app.danghoc.shoppingadmin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,6 +41,7 @@ public class AddNewAdmin extends AppCompatActivity {
         compositeDisposable = new CompositeDisposable();
         shoppingAPI = new RetrofitClient().getInstance(Common.API_RESTAURANT_ENDPOINT)
                 .create(IMyShoppingAPI.class);
+        initToolbar();
     }
 
     @OnClick(R.id.btn_add_admin)
@@ -60,4 +63,22 @@ public class AddNewAdmin extends AppCompatActivity {
                     Toast.makeText(AddNewAdmin.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
                 }));
     }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){ // button back
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initToolbar () {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
 }

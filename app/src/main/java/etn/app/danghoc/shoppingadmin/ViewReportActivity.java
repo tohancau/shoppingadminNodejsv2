@@ -1,10 +1,12 @@
 package etn.app.danghoc.shoppingadmin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class ViewReportActivity extends AppCompatActivity {
         listSanPhamBaoCao=new ArrayList<>();
         ButterKnife.bind(this);
         loadSanPham();
+        initToolbar();
     }
 
     private void loadSanPham() {
@@ -100,6 +103,23 @@ public class ViewReportActivity extends AppCompatActivity {
                 },throwable -> {
                     Toast.makeText(this, "check sp exits cart"+throwable.getMessage(), Toast.LENGTH_SHORT).show();
                 }));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){ // button back
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initToolbar () {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void deleteSanPham(int position) {
