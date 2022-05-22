@@ -92,7 +92,7 @@ public class UpdateInfoActivity extends AppCompatActivity {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(updateUserModel -> {
                             dialog.dismiss();
-                            compositeDisposable.add(myRestaurantAPI.getAdmin(Common.API_KEY,user.getUid())
+                            compositeDisposable.add(myRestaurantAPI.getAdmin(Common.API_KEY,user.getUid(),"123456")
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(userModel -> {

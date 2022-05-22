@@ -123,6 +123,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else if(id==R.id.nav_manage_admin){
             startActivity(new Intent(HomeActivity.this,ManagerAdmin.class));
         }
+        else if(id==R.id.nav_update_password){
+            startActivity(new Intent(HomeActivity.this,UpdatePasswordActivity.class));
+        }
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -21,14 +20,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class AddNewAdmin extends AppCompatActivity {
+public class UpdatePasswordActivity extends AppCompatActivity {
 
-    @BindView(R.id.edt_user_name)
-    EditText edt_user_name;
-    @BindView(R.id.edt_name)
-    EditText edt_name;
-    @BindView(R.id.edit_phone_number)
-    EditText edit_phone_number;
+    @BindView(R.id.edit_pass_word_update)
+    EditText edit_pass_word_update;
 
     IMyShoppingAPI shoppingAPI;
     CompositeDisposable compositeDisposable;
@@ -36,7 +31,7 @@ public class AddNewAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_admin);
+        setContentView(R.layout.activity_update_password);
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
         shoppingAPI = new RetrofitClient().getInstance(Common.API_RESTAURANT_ENDPOINT)
@@ -44,27 +39,32 @@ public class AddNewAdmin extends AppCompatActivity {
         initToolbar();
     }
 
-    @OnClick(R.id.btn_add_admin)
-    public void addAdmin(View view) {
-        compositeDisposable.add(shoppingAPI.addAdmin(
+
+    @OnClick(R.id.btn_update_pass_word)
+    public void updatePassword(View view) {
+        if(edit_pass_word_update.getText().toString().length()<6){
+            Toast.makeText(UpdatePasswordActivity.this, "mật khẩu phải tên 6 kí tự", Toast.LENGTH_SHORT).show();
+        }
+        compositeDisposable.add(shoppingAPI.updatePasswordAdmin(
                 Common.API_KEY,
-                edt_name.getText().toString(),
-                edt_user_name.getText().toString()
+                edit_pass_word_update.getText().toString(),
+                Common.currentUser.getIdAdmin()
         ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(model -> {
                     if (model.isSuccess()) {
-                        Toast.makeText(AddNewAdmin.this, "Thêm admin thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdatePasswordActivity.this, "đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(AddNewAdmin.this, model.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdatePasswordActivity.this, model.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }, throwable -> {
-                    Toast.makeText(AddNewAdmin.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdatePasswordActivity.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
                 }));
     }
 
+    // button back
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){ // button back
+    public boolean onOptionsItemSelected (MenuItem item){
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
             finish();
@@ -79,5 +79,4 @@ public class AddNewAdmin extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
-
 }

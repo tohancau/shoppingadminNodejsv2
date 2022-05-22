@@ -45,38 +45,37 @@ public class MainActivity extends AppCompatActivity {
     IMyShoppingAPI myRestaurantAPI;
     CompositeDisposable compositeDisposable=new CompositeDisposable();
 
-    SharedPreferences sharedPreferences;
 
     @BindView(R.id.btn_sign_in)
     Button btn_sign_in;
     @BindView(R.id.edt_user_name)
     EditText edt_user_name;
+    @BindView(R.id.edit_pass_word)
+    EditText edit_pass_word;
 
 
     @OnClick(R.id.btn_sign_in)
     void loginUser()
     {
-        compositeDisposable.add(myRestaurantAPI.getAdmin(Common.API_KEY,edt_user_name.getText().toString())
+        if(edit_pass_word.getText().toString().isEmpty()||edt_user_name.getText().toString().isEmpty()){
+            Toast.makeText(this, "chưa nhập mật khẩu hoặc tên đăng nhập", Toast.LENGTH_SHORT).show();
+            return; 
+        }
+        compositeDisposable.add(myRestaurantAPI.getAdmin(Common.API_KEY,edt_user_name.getText().toString(),edit_pass_word.getText().toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userModel -> {
                     if(userModel.isSuccess())
                     {
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
                         Common.currentUser=userModel.getResult().get(0);
-                        editor.putString("idadmin","fjsofjsdofhdsofi");
-                        editor.commit();
 
                         startActivity(new Intent(MainActivity.this,HomeActivity.class));
-                        //  startActivity(new Intent(MainActivity.this,ActivityTest.class));
-                        Toast.makeText(this, "ket thuc o hang trn", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     else
                     {
-                        Toast.makeText(this, "ket thuc o hang duoi", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this,UpdateInfoActivity.class));
-                        finish();
+                        Toast.makeText(this, "tên đăng nhập hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
+
                     }
                 }));
 
@@ -123,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
         Toast.makeText(MainActivity.this, "this is manin", Toast.LENGTH_SHORT);
         initt();
     }
@@ -141,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
             if(user!=null) //user really login
             {
-                compositeDisposable.add(myRestaurantAPI.getAdmin(Common.API_KEY,user.getUid())
+                compositeDisposable.add(myRestaurantAPI.getAdmin(Common.API_KEY,user.getUid(),"123456")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(userModel -> {

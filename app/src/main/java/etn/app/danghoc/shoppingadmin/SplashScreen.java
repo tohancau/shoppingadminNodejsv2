@@ -65,7 +65,7 @@ public class SplashScreen extends AppCompatActivity {
                         if (user != null)
                         {
                             compositeDisposable.add(myRestaurantAPI.getAdmin(etn.app.danghoc.shoppingadmin.common.Common.API_KEY,
-                                    user.getUid())
+                                    user.getUid(),"123456")
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(userModel -> {

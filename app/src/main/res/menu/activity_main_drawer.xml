@@ -36,5 +36,9 @@
             android:id="@+id/nav_signout"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
             android:title="@string/signout" />
+        <item
+            android:id="@+id/nav_update_password"
+            android:icon="@drawable/ic_baseline_grass_24"
+            android:title="đổi mật khẩu" />
     </group>
 </menu>

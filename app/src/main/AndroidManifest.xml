@@ -28,6 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingAdmin">
         <activity
+            android:name=".UpdatePasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".ManagerAdmin"
             android:exported="true" />
         <activity
